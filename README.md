@@ -19,10 +19,11 @@ SYNOPSIS
     my $s = "012345678901234567890";
 
     $s.&apply-fields($sf);  # or: apply-fields($s,$sf)
-    say $s;      # 012345678901234567890
-    say $s[0];   # 23456
-    say $s[1];   # 78901234
-    say $s[2];   # 567
+    say $s;            # 012345678901234567890
+    say $s[0];         # 23456
+    say $s[1];         # 78901234
+    say $s[2];         # 567
+    say $s.join(":");  # 23456:78901234:567
 ```
 
 DESCRIPTION
@@ -44,6 +45,13 @@ The `new` method creates a new `String::Fields` object that contains the format 
 
 Please note that this **just** sets the format information. This allows the same object to be used for different strings. Setting the string to be used, is either done with the `set-string` method, or by calling the `apply-fields` subroutine.
 
+join
+----
+
+    $s.join(":")
+
+Joins all fields together with the given separator.
+
 set-string
 ----------
 
@@ -53,6 +61,9 @@ The `set-string` method sets the string to which the format information should b
 
 SUBROUTINES
 ===========
+
+apply-fields
+------------
 
     apply-fields($s,$sf);  # or $s.&apply-fields($sf)
 

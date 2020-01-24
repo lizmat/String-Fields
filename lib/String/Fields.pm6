@@ -1,5 +1,5 @@
 use v6.c;
-class String::Fields:ver<0.0.1>:auth<cpan:ELIZABETH> does Positional does Iterable {
+class String::Fields:ver<0.0.2>:auth<cpan:ELIZABETH> does Positional does Iterable {
     has Str $.string handles <
       chars chomp chop codes comb contains encode ends-with fc flip gist
       indent index indices Int lc lines match NFC NFD NFKC NFKD Num
@@ -105,10 +105,11 @@ String::Fields - class for setting fixed size fields in a Str
     my $s = "012345678901234567890";
 
     $s.&apply-fields($sf);  # or: apply-fields($s,$sf)
-    say $s;      # 012345678901234567890
-    say $s[0];   # 23456
-    say $s[1];   # 78901234
-    say $s[2];   # 567
+    say $s;            # 012345678901234567890
+    say $s[0];         # 23456
+    say $s[1];         # 78901234
+    say $s[2];         # 567
+    say $s.join(":");  # 23456:78901234:567
 
 =end code
 
@@ -140,6 +141,12 @@ the same object to be used for different strings.  Setting the string to
 be used, is either done with the C<set-string> method, or by calling the
 C<apply-fields> subroutine.
 
+=head2 join
+
+    $s.join(":")
+
+Joins all fields together with the given separator.
+
 =head2 set-string
 
     $sf.set-string($string)
@@ -148,6 +155,8 @@ The C<set-string> method sets the string to which the format information
 should be applied.
 
 =head1 SUBROUTINES
+
+=head2 apply-fields
 
     apply-fields($s,$sf);  # or $s.&apply-fields($sf)
 
