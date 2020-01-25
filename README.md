@@ -24,6 +24,9 @@ SYNOPSIS
     say $s[1];         # 78901234
     say $s[2];         # 567
     say $s.join(":");  # 23456:78901234:567
+
+    # one time application
+    $s.&apply-fields(2,3,4);  # or: apply-fields($s,2,3,4)
 ```
 
 DESCRIPTION
@@ -41,7 +44,7 @@ new
 
     my $sf := String::Fields.new(2,3,4)
 
-The `new` method creates a new `String::Fields` object that contains the format information of the fields. It takes any number of parameters to indicate the position and width of the fields. If the parameter consists of just a number, it means the width of a field from where the last field has ended (or from position 0 for the first parameter). If the parameter consists of a `Pair`, then the key is taken for the offset, and the value is taken to be the width.
+The `new` method creates a new `String::Fields` object that contains the format information of the fields. It takes any number of arguments to indicate the position and width of the fields. If the argument consists of just a number, it means the width of a field from where the last field has ended (or from position 0 for the first argument). If the argument consists of a `Pair`, then the key is taken for the offset, and the value is taken to be the width.
 
 Please note that this **just** sets the format information. This allows the same object to be used for different strings. Setting the string to be used, is either done with the `set-string` method, or by calling the `apply-fields` subroutine.
 
@@ -67,7 +70,12 @@ apply-fields
 
     apply-fields($s,$sf);  # or $s.&apply-fields($sf)
 
-The `apply-fields` subroutine takes two parameters: a variable with a string in it, and the `String::Fields` object that should be applied to it. After application, the variable has become a `String::Fields` object, but will still act as the ordinary `Str` it was.
+    # one time application
+    $s.&apply-fields(2,3,4);  # or: apply-fields($s,2,3,4)
+
+The first argument to the `apply-fields` subroutine must be a variable with a string in it. The second argument can be the `String::Fields` object that should be applied to it. Or it can be the first of any number of field specifications, as can be passed to the `new` method.
+
+After application, the variable has become a `String::Fields` object, but will still act as the ordinary `Str` it was.
 
 AUTHOR
 ======

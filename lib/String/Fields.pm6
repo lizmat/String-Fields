@@ -1,5 +1,5 @@
 use v6.c;
-class String::Fields:ver<0.0.2>:auth<cpan:ELIZABETH> does Positional does Iterable {
+class String::Fields:ver<0.0.3>:auth<cpan:ELIZABETH> does Positional does Iterable {
     has Str $.string handles <
       chars chomp chop codes comb contains encode ends-with fc flip gist
       indent index indices Int lc lines match NFC NFD NFKC NFKD Num
@@ -58,7 +58,7 @@ class String::Fields:ver<0.0.2>:auth<cpan:ELIZABETH> does Positional does Iterab
         $pos >= 0 && $pos < @!from
     }
 
-    my class IterateString {
+    my class IterateString does Iterator {
         has String::Fields $.string;
         has int $!elems = $!string.elems;
         has int $!i = -1;
@@ -81,6 +81,9 @@ multi sub apply-fields(String::Fields:D $sf is rw, String::Fields:D $new) {
 }
 multi sub apply-fields(Str:D $string is rw, String::Fields:D $sf) {
     ($string = $sf.set-string($string))<>;   # decont allows iteration
+}
+multi sub apply-fields(Str:D $string is rw, *@positions) {
+    ($string = String::Fields.new(@positions).set-string($string))<>;   # decont allows iteration
 }
 
 =begin pod
@@ -111,6 +114,9 @@ String::Fields - class for setting fixed size fields in a Str
     say $s[2];         # 567
     say $s.join(":");  # 23456:78901234:567
 
+    # one time application
+    $s.&apply-fields(2,3,4);  # or: apply-fields($s,2,3,4)
+
 =end code
 
 =head1 DESCRIPTION
@@ -129,10 +135,10 @@ the normal ways that a string would.
     my $sf := String::Fields.new(2,3,4)
   
 The C<new> method creates a new C<String::Fields> object that contains the
-format information of the fields.  It takes any number of parameters to
-indicate the position and width of the fields.  If the parameter consists
+format information of the fields.  It takes any number of arguments to
+indicate the position and width of the fields.  If the argument consists
 of just a number, it means the width of a field from where the last field
-has ended (or from position 0 for the first parameter).  If the parameter
+has ended (or from position 0 for the first argument).  If the argument
 consists of a C<Pair>, then the key is taken for the offset, and the value
 is taken to be the width.
 
@@ -160,9 +166,15 @@ should be applied.
 
     apply-fields($s,$sf);  # or $s.&apply-fields($sf)
 
-The C<apply-fields> subroutine takes two parameters: a variable with a
-string in it, and the C<String::Fields> object that should be applied
-to it.  After application, the variable has become a C<String::Fields>
+    # one time application
+    $s.&apply-fields(2,3,4);  # or: apply-fields($s,2,3,4)
+
+The first argument to the C<apply-fields> subroutine must be a variable
+with a string in it.  The second argument can be the C<String::Fields>
+object that should be applied to it.  Or it can be the first of any
+number of field specifications, as can be passed to the C<new> method.
+
+After application, the variable has become a C<String::Fields>
 object, but will still act as the ordinary C<Str> it was.
 
 =head1 AUTHOR

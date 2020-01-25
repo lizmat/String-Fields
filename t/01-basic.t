@@ -2,7 +2,7 @@ use v6.c;
 use Test;
 use String::Fields;
 
-plan 14;
+plan 15;
 
 my $sf := String::Fields.new(3,4,5);
 isa-ok $sf, String::Fields,
@@ -39,6 +39,10 @@ isa-ok $foo, String::Fields,
 @fields = ();
 @fields.push($_) for $foo<>;
 is-deeply @fields, [<ij abc ef>], 'did we iterate ok';
+
+my $bar = "abcdefghijklmnopqrstuvwxyz";
+@fields = $bar.&apply-fields(4,5,6);
+is-deeply @fields, [<abcd efghi jklmno>], 'did we store ok';
 
 ok $foo.starts-with("abcde"), 'check normal Str method';
 

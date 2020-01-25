@@ -2,6 +2,10 @@ Revision history for String-Fields
 
 {{$NEXT}}
 
+0.0.3  2020-01-25T13:10:20+01:00
+    - Added ad-hoc support to "apply-fields"
+    - Made sure the iterator does Iterator
+
 0.0.2  2020-01-24T18:07:45+01:00
     - Add missing =head2 for "apply-fields"
     - Document the "join" method
