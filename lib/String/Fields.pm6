@@ -1,5 +1,5 @@
 use v6.c;
-class String::Fields:ver<0.0.3>:auth<cpan:ELIZABETH> does Positional does Iterable {
+class String::Fields:ver<0.0.4>:auth<cpan:ELIZABETH> does Positional does Iterable {
     has Str $.string handles <
       chars chomp chop codes comb contains encode ends-with fc flip gist
       indent index indices Int lc lines match NFC NFD NFKC NFKD Num
@@ -80,10 +80,16 @@ multi sub apply-fields(String::Fields:D $sf is rw, String::Fields:D $new) {
     ($sf = $new.set-string($sf.string))<>;   # decont allows iteration
 }
 multi sub apply-fields(Str:D $string is rw, String::Fields:D $sf) {
-    ($string = $sf.set-string($string))<>;   # decont allows iteration
+    ($string = $sf.set-string($string))<>;
+}
+multi sub apply-fields(Str:D $string, String::Fields:D $sf) {
+    $sf.set-string($string)<>;
 }
 multi sub apply-fields(Str:D $string is rw, *@positions) {
-    ($string = String::Fields.new(@positions).set-string($string))<>;   # decont allows iteration
+    ($string = String::Fields.new(@positions).set-string($string))<>;
+}
+multi sub apply-fields(Str:D $string, *@positions) {
+    String::Fields.new(@positions).set-string($string)<>;
 }
 
 =begin pod
@@ -116,6 +122,9 @@ String::Fields - class for setting fixed size fields in a Str
 
     # one time application
     $s.&apply-fields(2,3,4);  # or: apply-fields($s,2,3,4)
+
+    # using a literal string
+    my @fields = "abcdefg".&apply-fields(2,3);  # ["ab","cde"]
 
 =end code
 
@@ -169,13 +178,17 @@ should be applied.
     # one time application
     $s.&apply-fields(2,3,4);  # or: apply-fields($s,2,3,4)
 
-The first argument to the C<apply-fields> subroutine must be a variable
-with a string in it.  The second argument can be the C<String::Fields>
-object that should be applied to it.  Or it can be the first of any
-number of field specifications, as can be passed to the C<new> method.
+    # using a literal string
+    my @fields = "abcdefg".&apply-fields(2,3);  # ["ab","cde"]
 
-After application, the variable has become a C<String::Fields>
-object, but will still act as the ordinary C<Str> it was.
+If the first argument to the C<apply-fields> subroutine is a variable
+with a string in it, then it will become a C<String::Fields> object
+(but will still act as the original string).  If it is a string
+literal, then the created / applied C<String::Fields> object will
+be returned.  The other arguments indicate the fields that should be
+applie.  This can be either be a C<String::Fields> object, or it can
+any number of field specifications, as can be passed to the C<new>
+method.
 
 =head1 AUTHOR
 

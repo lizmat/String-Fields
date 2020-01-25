@@ -2,6 +2,9 @@ Revision history for String-Fields
 
 {{$NEXT}}
 
+0.0.4  2020-01-25T13:21:50+01:00
+    - Add support for literal strings to "apply-fields"
+
 0.0.3  2020-01-25T13:10:20+01:00
     - Added ad-hoc support to "apply-fields"
     - Made sure the iterator does Iterator

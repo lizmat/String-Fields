@@ -27,6 +27,9 @@ SYNOPSIS
 
     # one time application
     $s.&apply-fields(2,3,4);  # or: apply-fields($s,2,3,4)
+
+    # using a literal string
+    my @fields = "abcdefg".&apply-fields(2,3);  # ["ab","cde"]
 ```
 
 DESCRIPTION
@@ -73,9 +76,10 @@ apply-fields
     # one time application
     $s.&apply-fields(2,3,4);  # or: apply-fields($s,2,3,4)
 
-The first argument to the `apply-fields` subroutine must be a variable with a string in it. The second argument can be the `String::Fields` object that should be applied to it. Or it can be the first of any number of field specifications, as can be passed to the `new` method.
+    # using a literal string
+    my @fields = "abcdefg".&apply-fields(2,3);  # ["ab","cde"]
 
-After application, the variable has become a `String::Fields` object, but will still act as the ordinary `Str` it was.
+If the first argument to the `apply-fields` subroutine is a variable with a string in it, then it will become a `String::Fields` object (but will still act as the original string). If it is a string literal, then the created / applied `String::Fields` object will be returned. The other arguments indicate the fields that should be applie. This can be either be a `String::Fields` object, or it can any number of field specifications, as can be passed to the `new` method.
 
 AUTHOR
 ======
