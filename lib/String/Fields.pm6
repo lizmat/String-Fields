@@ -1,5 +1,5 @@
 use v6.c;
-class String::Fields:ver<0.0.4>:auth<cpan:ELIZABETH> does Positional does Iterable {
+class String::Fields:ver<0.0.5>:auth<cpan:ELIZABETH> does Positional does Iterable {
     has Str $.string handles <
       chars chomp chop codes comb contains encode ends-with fc flip gist
       indent index indices Int lc lines match NFC NFD NFKC NFKD Num
