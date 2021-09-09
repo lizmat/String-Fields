@@ -2,6 +2,12 @@ Revision history for String-Fields
 
 {{$NEXT}}
 
+0.0.6  2021-09-10T00:02:43+02:00
+    - Change file extension to .rakumod
+    - Migrate to zef ecosystem
+    - Update email address
+    - Update copyright year
+
 0.0.5  2020-01-27T16:02:47+01:00
     - Remove bogus build dependency, spotted by Altai-man++
 

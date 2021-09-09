@@ -1,22 +1,26 @@
 {
-  "auth" : "cpan:ELIZABETH",
-  "authors" : [
+  "auth": "zef:lizmat",
+  "authors": [
     "Elizabeth Mattijsen"
   ],
-  "build-depends" : [ ],
-  "depends" : [ ],
-  "description" : "class for setting fixed size fields in a Str",
-  "license" : "Artistic-2.0",
-  "name" : "String::Fields",
-  "perl" : "6.c",
-  "provides" : {
-    "String::Fields" : "lib/String/Fields.pm6"
+  "build-depends": [
+  ],
+  "depends": [
+  ],
+  "description": "class for setting fixed size fields in a Str",
+  "license": "Artistic-2.0",
+  "name": "String::Fields",
+  "perl": "6.c",
+  "provides": {
+    "String::Fields": "lib/String/Fields.rakumod"
   },
-  "resources" : [ ],
-  "source-url" : "https://github.com/lizmat/String-Fields.git",
-  "tags" : [
+  "resources": [
+  ],
+  "source-url": "https://github.com/lizmat/String-Fields.git",
+  "tags": [
     "UTILS"
   ],
-  "test-depends" : [ ],
-  "version" : "0.0.5"
+  "test-depends": [
+  ],
+  "version": "0.0.6"
 }
