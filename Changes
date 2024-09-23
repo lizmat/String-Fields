@@ -1,6 +1,8 @@
 Revision history for String-Fields
 
 {{$NEXT}}
+
+0.0.7  2024-09-23T16:07:35+02:00
     - Modernize pod and test file extension
     - Add CI badge for each OS
     - Add sponsor button and link
