@@ -1,5 +1,4 @@
-use v6.c;
-class String::Fields:ver<0.0.6>:auth<zef:lizmat> does Positional does Iterable {
+class String::Fields does Positional does Iterable {
     has Str $.string handles <
       chars chomp chop codes comb contains encode ends-with fc flip gist
       indent index indices Int lc lines match NFC NFD NFKC NFKD Num
@@ -100,31 +99,31 @@ String::Fields - class for setting fixed size fields in a Str
 
 =head1 SYNOPSIS
 
-=begin code :lang<perl6>
+=begin code :lang<raku>
 
-    use String::Fields;
+use String::Fields;
 
-    my $sf := String::Fields.new(2,3,4)
-    .say for $sf.set-string("abcdefghijklmnopqrstuvwxyz");
-    # ab
-    # cde
-    # fghi
+my $sf := String::Fields.new(2,3,4)
+.say for $sf.set-string("abcdefghijklmnopqrstuvwxyz");
+# ab
+# cde
+# fghi
 
-    my $sf := String::Fields.new(2 => 5, 8, 3);
-    my $s = "012345678901234567890";
+my $sf := String::Fields.new(2 => 5, 8, 3);
+my $s = "012345678901234567890";
 
-    $s.&apply-fields($sf);  # or: apply-fields($s,$sf)
-    say $s;            # 012345678901234567890
-    say $s[0];         # 23456
-    say $s[1];         # 78901234
-    say $s[2];         # 567
-    say $s.join(":");  # 23456:78901234:567
+$s.&apply-fields($sf);  # or: apply-fields($s,$sf)
+say $s;            # 012345678901234567890
+say $s[0];         # 23456
+say $s[1];         # 78901234
+say $s[2];         # 567
+say $s.join(":");  # 23456:78901234:567
 
-    # one time application
-    $s.&apply-fields(2,3,4);  # or: apply-fields($s,2,3,4)
+# one time application
+$s.&apply-fields(2,3,4);  # or: apply-fields($s,2,3,4)
 
-    # using a literal string
-    my @fields = "abcdefg".&apply-fields(2,3);  # ["ab","cde"]
+# using a literal string
+my @fields = "abcdefg".&apply-fields(2,3);  # ["ab","cde"]
 
 =end code
 
@@ -141,7 +140,11 @@ the normal ways that a string would.
 
 =head2 new
 
-    my $sf := String::Fields.new(2,3,4)
+=begin code :lang<raku>
+
+my $sf := String::Fields.new(2,3,4)
+
+=end code
   
 The C<new> method creates a new C<String::Fields> object that contains the
 format information of the fields.  It takes any number of arguments to
@@ -158,13 +161,21 @@ C<apply-fields> subroutine.
 
 =head2 join
 
-    $s.join(":")
+=begin code :lang<raku>
+
+$s.join(":");
+
+=end code
 
 Joins all fields together with the given separator.
 
 =head2 set-string
 
-    $sf.set-string($string)
+=begin code :lang<raku>
+
+$sf.set-string($string)
+
+=end code
 
 The C<set-string> method sets the string to which the format information
 should be applied.
@@ -173,13 +184,17 @@ should be applied.
 
 =head2 apply-fields
 
-    apply-fields($s,$sf);  # or $s.&apply-fields($sf)
+=begin code :lang<raku>
 
-    # one time application
-    $s.&apply-fields(2,3,4);  # or: apply-fields($s,2,3,4)
+apply-fields($s,$sf);  # or $s.&apply-fields($sf)
 
-    # using a literal string
-    my @fields = "abcdefg".&apply-fields(2,3);  # ["ab","cde"]
+# one time application
+$s.&apply-fields(2,3,4);  # or: apply-fields($s,2,3,4)
+
+# using a literal string
+my @fields = "abcdefg".&apply-fields(2,3);  # ["ab","cde"]
+
+=end code
 
 If the first argument to the C<apply-fields> subroutine is a variable
 with a string in it, then it will become a C<String::Fields> object
@@ -194,16 +209,20 @@ method.
 
 Elizabeth Mattijsen <liz@raku.rocks>
 
-Source can be located at: https://github.com/lizmat/String-Fields . Comments and
-Pull Requests are welcome.
+Source can be located at: https://github.com/lizmat/String-Fields . Comments
+and Pull Requests are welcome.
+
+If you like this module, or what I'm doing more generally, committing to a
+L<small sponsorship|https://github.com/sponsors/lizmat/>  would mean a great
+deal to me!
 
 =head1 COPYRIGHT AND LICENSE
 
-Copyright 2020, 2021 Elizabeth Mattijsen
+Copyright 2020, 2021, 2024 Elizabeth Mattijsen
 
 This library is free software; you can redistribute it and/or modify it under
 the Artistic License 2.0.
 
 =end pod
 
-# vim: ft=perl6 expandtab sw=4
+# vim: expandtab shiftwidth=4

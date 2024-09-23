@@ -1,6 +1,10 @@
 Revision history for String-Fields
 
 {{$NEXT}}
+    - Modernize pod and test file extension
+    - Add CI badge for each OS
+    - Add sponsor button and link
+    - Update copyright year
 
 0.0.6  2021-09-10T00:02:43+02:00
     - Change file extension to .rakumod
